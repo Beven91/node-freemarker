@@ -1,0 +1,145 @@
+body, html {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    overflow: hidden;
+    overflow-x: none;
+}
+
+html {
+    border: 1px solid #CB4DED;
+    border-bottom: 0px;
+}
+
+.content {
+    position: absolute;
+    top: 40px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+.iframe {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.spinner {
+    width: 50px;
+    height: 60px;
+    text-align: center;
+    font-size: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -30px;
+    margin-left: -25px;
+}
+
+.spinner > div {
+    background-color: #67CF22;
+    height: 100%;
+    width: 6px;
+    display: inline-block;
+    -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+    animation: stretchdelay 1.2s infinite ease-in-out;
+}
+
+.spinner .rect2 {
+    -webkit-animation-delay: -1.1s;
+    animation-delay: -1.1s;
+}
+
+.spinner .rect3 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+
+.spinner .rect4 {
+    -webkit-animation-delay: -0.9s;
+    animation-delay: -0.9s;
+}
+
+.spinner .rect5 {
+    -webkit-animation-delay: -0.8s;
+    animation-delay: -0.8s;
+}
+
+@-webkit-keyframes stretchdelay {
+    0%,
+    40%,
+    100% {
+        -webkit-transform: scaleY(0.4)
+    }
+    20% {
+        -webkit-transform: scaleY(1.0)
+    }
+}
+
+@keyframes stretchdelay {
+    0%,
+    40%,
+    100% {
+        transform: scaleY(0.4);
+        -webkit-transform: scaleY(0.4);
+    }
+    20% {
+        transform: scaleY(1.0);
+        -webkit-transform: scaleY(1.0);
+    }
+}
+
+.appdrag {
+    -webkit-user-select: none;
+    -webkit-app-region: drag
+}
+
+.nw-header {
+    height: 40px;
+    background: #CB4DED;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 400;
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+}
+
+.header .close{
+    position:absolute;
+    right:10px;
+    top:10px;
+    color:#fff;
+    z-index:999999;
+    padding:0px 5px;
+    text-align:right;
+    cursor:pointer;
+    -webkit-user-select: none;
+    -webkit-app-region: no-drag;
+}
+
+::-webkit-scrollbar-track-piece {
+    -webkit-border-radius: 0;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    height: 50px;
+    background-color: #ccc;
+    -webkit-border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    height: 50px;
+    outline: 0;
+    outline-offset: -2px;
+    border: none;
+    background-color: #ccc;
+    border-radius: 5px;
+}

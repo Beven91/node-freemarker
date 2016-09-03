@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html class="fit-height" lang="zh-cn">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>网页旅行者</title>
+    <link href="content/css/site.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body class="fit-height pos-index" style="">
+    <div class="header">
+        <div class="nw-header" id="title">网页旅行者</div>
+        <span class="close" id="btnClose">X</span>
+    </div>
+    <div class="content">
+        <iframe src="" class="iframe" id="travlerBox"> </iframe>
+    </div>
+    <div class="spinner" id="loading">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+    <script type="text/javascript">
+        var travlerBox  =document.getElementById('travlerBox');
+        var url ='http://localhost:9000/';
+        var loginUrl = 'http://localhost:9000/user/login'
+        var dynamicUrls =[
+            '/item/\\d+',
+            '/demand/\\d+',
+            '/pay/trade/user/\\d+',
+            '/pay/trade/shop/\\d+',
+            '/demand/buyer/\\d+'
+        ];
+        process.mainModule.exports.init(travlerBox,url,loginUrl,true,dynamicUrls);
+        window.addEventListener('keydown', function (ev) {
+            var ngui = require('nw.gui');
+            var nwWindow = ngui.Window.get();
+            if (ev.keyCode === 123) {
+                nwWindow.showDevTools();
+            }
+        });
+        document.getElementById("btnClose").addEventListener("click",function(){
+            var ngui = require('nw.gui');
+            var nwWindow = ngui.Window.get();
+            nwWindow.close();
+        });
+    </script>
+
+</html>

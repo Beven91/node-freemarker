@@ -1,0 +1,27 @@
+﻿{
+  "name": "网站旅行者",
+  "description": "网站旅行者",
+  "version": "0.1",
+  "main": "index.html",
+  "node-main":"startup.js",
+  "inject-js-start":"start.js",
+  "inject-js-end":"end.js",
+  "node-remote":"http://localhost,127.0.0.1, [0:0::1],[::1],http://[::1]:9000",
+  "window": {
+    "debug":true,
+    "show": true,
+    "toolbar": false,
+    "frame":false,
+    "position": "center",
+    "fullscreen":false,
+    "as_desktop":false,
+	"min_width":1130,
+	"min_height":600,
+    "kiosk":false,
+	"transparent":false,
+	"visible-on-all-workspaces":true
+  },
+  "webkit": {
+    "plugin": false
+  }
+}
