@@ -5,6 +5,7 @@
 'use strict';
 
 var compiler = require('../compile.js');
+var path = require('path');
 
 module.exports = function (grunt) {
     //regist grunt task
