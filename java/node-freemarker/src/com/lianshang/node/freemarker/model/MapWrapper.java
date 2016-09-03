@@ -1,6 +1,7 @@
 package com.lianshang.node.freemarker.model;
 
 import com.lianshang.node.freemarker.utils.Freemarker;
+import freemarker.ext.beans.BeanModel;
 import freemarker.ext.beans.MapModel;
 import freemarker.ext.beans.SimpleMethodModel;
 import freemarker.template.TemplateModel;
@@ -21,15 +22,16 @@ import java.util.Map;
  * 使map类型数据支持相关实体类的特性
  * 从而提高mock数据的适应性
  */
-public class MapWrapper  extends MapModel {
+public class MapWrapper extends MapModel {
 
     private DataMap inner = null;
 
     public MapWrapper(DataMap map) {
-        super(map,new freemarker.ext.beans.BeansWrapper());
+        super(map, new freemarker.ext.beans.BeansWrapper());
         this.inner = map;
         this.inner.setWrapper(this);
     }
+
 
     /**
      * freemarker 根据key获取对应的值的总入口 因为在进行Json序列化时，会将数据都封装成mapwrapper类型
@@ -47,8 +49,8 @@ public class MapWrapper  extends MapModel {
     }
 
     public Object exec(List arguments) throws TemplateModelException {
-        Object key = this.unwrap((TemplateModel)arguments.get(0));
-        return this.wrap(((Map)this.object).get(key));
+        Object key = this.unwrap((TemplateModel) arguments.get(0));
+        return this.wrap(((Map) this.object).get(key));
     }
 
     /**
@@ -63,9 +65,9 @@ public class MapWrapper  extends MapModel {
 
     private Object dispatch(String key) throws ParseException {
         String type = "common";
-        if(inner.containsKey(key)){
-            type="common";
-        }else if (key.startsWith("is")) {
+        if (inner.containsKey(key)) {
+            type = "common";
+        } else if (key.startsWith("is")) {
             type = "method";
             key = key.substring(2, 4).toLowerCase() + key.substring(4, key.length());
         } else if (key.startsWith("get")) {
@@ -130,4 +132,12 @@ public class MapWrapper  extends MapModel {
         return methodModel;
     }
 
+    @Override
+    public TemplateModel get(String key) throws TemplateModelException {
+        if (key.equals("values") && this.inner.containsKey(key)) {
+            return this.wrap(this.inner.get2((Object) key));
+        } else {
+            return super.get(key);
+        }
+    }
 }

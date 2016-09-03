@@ -10,7 +10,7 @@ var iconv = require("iconv-lite");
 var path = require("path");
 var fs = require('fs');
 
-var jarFile = path.join(__dirname, "../jar/node-freemarker.jar");
+var jarFile = path.join(__dirname, "/jar/node-freemarker.jar");
 
 /**
  * constructor of  nodejs compile freemarker.ftl utils
@@ -21,7 +21,7 @@ function Freemarker() {
 /**
  * compile  .ftl views
  */
-Freemarker.prototype.compileMock = function (asyncDone, files, settings) {
+Freemarker.prototype.compileMock = function (files, settings,asyncDone) {
     try {
         //set done function
         this.asyncDone = asyncDone;
