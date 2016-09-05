@@ -4,7 +4,7 @@ var compiler = require('./compile.js');
 /**
  {
         freemarker: settings.freemarker,//freemarker configuration.properties
-        views: settings.views,//views directory
+        targetDIR: settings.views,//views directory
         encoding: (mock.encoding || settings.encoding)
  }
  */

@@ -97,7 +97,7 @@ Freemarker.prototype.compileFtl = function (ftl, data, callback) {
     var settings = this.settings;
     var mock = { view: ftl, data: data };
     var destFile = path.join(settings.targetDIR, mock.view.replace(path.extname(mock.view), ".html"));
-    var cfgfile = this.configCompile(mock, file);
+    var cfgfile = this.configCompile(mock, ftl);
     // Get results
     this.processTemplate(cfgfile, function (err, result) {
         fs.unlinkSync(cfgfile);
