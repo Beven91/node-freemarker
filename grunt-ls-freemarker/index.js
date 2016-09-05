@@ -1,17 +1,19 @@
 var compiler = require('./compile.js');
-var path  =require('path');
+var path = require('path');
 
 /**
  {
         freemarker: settings.freemarker,//freemarker configuration.properties
-        targetDIR: settings.views,//views directory
+        views: settings.views,//views directory
+        targetDIR:'' //compile 
         encoding: (mock.encoding || settings.encoding)
  }
  */
 
 function FreemarkerCompiler(settings) {
     compiler.settings = {
-        targetDIR: settings.targetDIR || 'views', //default  views directory
+        targetDIR: './',
+        views: settings.views || 'views', //default  views directory
         encoding: settings.encoding || "utf-8", //default encoding
         freemarker: settings.freemarker || path.join(__dirname, '..', 'freemarker.properties'), //default freemarker.properties file
     }
