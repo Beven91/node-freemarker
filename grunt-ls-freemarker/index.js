@@ -1,5 +1,5 @@
 var compiler = require('./compile.js');
-
+var path  =require('path');
 
 /**
  {
