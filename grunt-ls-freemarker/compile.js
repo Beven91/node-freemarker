@@ -15,13 +15,12 @@ var jarFile = path.join(__dirname, "/jar/node-freemarker.jar");
 /**
  * constructor of  nodejs compile freemarker.ftl utils
  */
-function Freemarker() {
-}
+function Freemarker() {}
 
 /**
  * compile  .ftl views
  */
-Freemarker.prototype.compileMock = function (files, settings,asyncDone) {
+Freemarker.prototype.compileMock = function(files, settings, asyncDone) {
     try {
         //set done function
         this.asyncDone = asyncDone;
@@ -35,13 +34,14 @@ Freemarker.prototype.compileMock = function (files, settings,asyncDone) {
         this.warn(ex.stack);
     }
 }
+
 /**
  * find ftl views
  */
-Freemarker.prototype.findMockjsList = function (files) {
+Freemarker.prototype.findMockjsList = function(files) {
     var mockjsList = this.findedMockjsList = [];
-    files.forEach(function (f) {
-        var afterMockJsList = f.src.filter(function (filepath) {
+    files.forEach(function(f) {
+        var afterMockJsList = f.src.filter(function(filepath) {
             // Warn on and remove invalid source files (if nonull was set).
             if (!fs.existsSync(filepath)) {
                 this.warn('Mock file "' + filepath + '" not found.');
@@ -57,11 +57,11 @@ Freemarker.prototype.findMockjsList = function (files) {
 /**
  * compile views use finded mockjs list
  */
-Freemarker.prototype.compileAllByMockjs = function () {
+Freemarker.prototype.compileAllByMockjs = function() {
     var self = this;
     this.processCount = this.findedMockjsList.length;
     if (this.processCount > 0) {
-        this.findedMockjsList.map(function (view) {
+        this.findedMockjsList.map(function(view) {
             self.compileByMockjs(view);
         });
     } else {
@@ -72,7 +72,7 @@ Freemarker.prototype.compileAllByMockjs = function () {
 /**
  * compile view use mockjs
  */
-Freemarker.prototype.compileByMockjs = function (filepath) {
+Freemarker.prototype.compileByMockjs = function(filepath) {
     var self = this;
     var settings = this.settings;
     // Load the mock
@@ -83,7 +83,7 @@ Freemarker.prototype.compileByMockjs = function (filepath) {
     var destFile = path.join(settings.targetDIR, mock.out || mock.view.replace(path.extname(mock.view), ".html"));
     var cfgfile = this.configCompile(mock, file);
     // Get results
-    this.processTemplate(cfgfile, function (err, result) {
+    this.processTemplate(cfgfile, function(err, result) {
         fs.unlinkSync(cfgfile);
         self.onViewCompiled(err, result, destFile, filepath);
     });
@@ -92,14 +92,17 @@ Freemarker.prototype.compileByMockjs = function (filepath) {
 /**
  * compile view
  */
-Freemarker.prototype.compileFtl = function (ftl, data, callback) {
+Freemarker.prototype.compileFtl = function(ftl, data, callback) {
     var self = this;
     var settings = this.settings;
-    var mock = { view: ftl, data: data };
+    var mock = {
+        view: ftl,
+        data: data
+    };
     var destFile = path.join(settings.targetDIR, mock.view.replace(path.extname(mock.view), ".html"));
     var cfgfile = this.configCompile(mock, ftl);
     // Get results
-    this.processTemplate(cfgfile, function (err, result) {
+    this.processTemplate(cfgfile, function(err, result) {
         fs.unlinkSync(cfgfile);
         callback && callback(err, result);
     });
@@ -108,14 +111,14 @@ Freemarker.prototype.compileFtl = function (ftl, data, callback) {
 /**
  * config compile
  */
-Freemarker.prototype.configCompile = function (mock, filePath) {
+Freemarker.prototype.configCompile = function(mock, filePath) {
     var settings = this.settings;
     var dir = path.join(__dirname, 'compile');
     var file = path.join(dir, path.basename(filePath) + ".json");
     var compileOptions = {
-        freemarker: settings.freemarker,//freemarker configuration.properties
-        views: settings.views,//views directory
-        templateName: mock.view,//template Name
+        freemarker: settings.freemarker, //freemarker configuration.properties
+        views: settings.views, //views directory
+        templateName: mock.view, //template Name
         encoding: (mock.encoding || settings.encoding),
         dataJson: this.getDataJson(mock.data)
     }
@@ -129,7 +132,7 @@ Freemarker.prototype.configCompile = function (mock, filePath) {
 /**
  * 获取dataJson
  */
-Freemarker.prototype.getDataJson = function (data) {
+Freemarker.prototype.getDataJson = function(data) {
     this.extensionKeyObject(data);
     return JSON.stringify(data) //data jsonstring
 }
@@ -137,9 +140,10 @@ Freemarker.prototype.getDataJson = function (data) {
 /**
  * 数据类型处理
  */
-Freemarker.prototype.extensionKeyObject = function (data) {
+Freemarker.prototype.extensionKeyObject = function(data) {
     var keys = Object.keys(data);
-    var value = null, key = null;
+    var value = null,
+        key = null;
     for (var i = 0, k = keys.length; i < k; i++) {
         key = keys[i];
         value = data[key];
@@ -154,14 +158,14 @@ Freemarker.prototype.extensionKeyObject = function (data) {
 /**
  * 判断是否为Object类型
  */
-Freemarker.prototype.isObject = function (v) {
+Freemarker.prototype.isObject = function(v) {
     return Object.prototype.toString.apply(v) === "[object Object]";
 }
 
 /**
  * 数据key处理
  */
-Freemarker.prototype.extensionKeyOfValue = function (value, data, key) {
+Freemarker.prototype.extensionKeyOfValue = function(value, data, key) {
     if (value instanceof Date) {
         delete data[key];
         data['date+' + key] = dateFormat(value, 'yyyy-MM-dd hh:mm:ss.0');
@@ -172,7 +176,7 @@ Freemarker.prototype.extensionKeyOfValue = function (value, data, key) {
 /**
  * on view compiled
  */
-Freemarker.prototype.onViewCompiled = function (err, result, dest, filepath) {
+Freemarker.prototype.onViewCompiled = function(err, result, dest, filepath) {
     var content = result;
     this.processCount--;
     if (err) {
@@ -193,24 +197,26 @@ Freemarker.prototype.onViewCompiled = function (err, result, dest, filepath) {
  * @param cfgFile config file path
  * @param callback on compiled called function
  */
-Freemarker.prototype.processTemplate = function (cfgFile, callback) {
+Freemarker.prototype.processTemplate = function(cfgFile, callback) {
     var dataBuffers = [];
     var cmd = spawn('java', ["-jar", jarFile, cfgFile]);
-    var error = null, hasError = false, self = this;
+    var error = null,
+        hasError = false,
+        self = this;
     if (callback) {
         //on received cmd data
-        cmd.stdout.on("data", function (data) {
+        cmd.stdout.on("data", function(data) {
             dataBuffers.push(iconv.decode(data, 'gbk'));
         });
         //on received cmd error info
-        cmd.stderr.on("data", function (data) {
+        cmd.stderr.on("data", function(data) {
             hasError = true;
             error = iconv.decode(data, 'gbk');
             dataBuffers.push(error);
             console.log(error);
         });
         //on compiled
-        cmd.stdout.on("end", function () {
+        cmd.stdout.on("end", function() {
             callback(null, self.resultRender(dataBuffers, hasError));
         });
     }
@@ -219,7 +225,7 @@ Freemarker.prototype.processTemplate = function (cfgFile, callback) {
 /**
  * render template result
  */
-Freemarker.prototype.resultRender = function (dataBuffers, hasError) {
+Freemarker.prototype.resultRender = function(dataBuffers, hasError) {
     var content = dataBuffers.join('');
     if (hasError) {
         return this.errorWrap(content);
@@ -232,7 +238,7 @@ Freemarker.prototype.resultRender = function (dataBuffers, hasError) {
  * error template html
  */
 
-Freemarker.prototype.errorWrap = function (content) {
+Freemarker.prototype.errorWrap = function(content) {
     content = (content || "").replace(".compile.ftl", ".ftl");
     var htmls = [
         '<html>',
@@ -253,21 +259,21 @@ Freemarker.prototype.errorWrap = function (content) {
 /**
  * done compile
  */
-Freemarker.prototype.done = function (result) {
+Freemarker.prototype.done = function(result) {
     this.asyncDone(result);
 }
 
 /**
  * out log
  */
-Freemarker.prototype.log = function (message) {
+Freemarker.prototype.log = function(message) {
     console.log(message);
 }
 
 /**
  * out warn log
  */
-Freemarker.prototype.warn = function (message) {
+Freemarker.prototype.warn = function(message) {
     console.error(message);
 }
 
@@ -278,7 +284,7 @@ function dateFormat(date, fmt) {
         "h+": date.getHours(), //小时 
         "m+": date.getMinutes(), //分 
         "s+": date.getSeconds(), //秒 
-        "q+": Math.floor((date.getMonth() + 3) / 3),//季度 
+        "q+": Math.floor((date.getMonth() + 3) / 3), //季度 
         "S": date.getMilliseconds() //毫秒
     };
     if (/(y+)/.test(fmt)) {

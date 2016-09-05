@@ -10,11 +10,15 @@ var compiler = require('./compile.js');
  */
 
 function FreemarkerCompiler(settings) {
-    compiler.settings = settings;
+    compiler.settings = {
+        targetDIR: settings.targetDIR || 'views', //default  views directory
+        encoding: settings.encoding || "utf-8", //default encoding
+        freemarker: settings.freemarker || path.join(__dirname, '..', 'freemarker.properties'), //default freemarker.properties file
+    }
 }
 
-FreemarkerCompiler.prototype.compile = function (ftl,data,callback) {
-    compiler.compileFtl(ftl,data,callback);
+FreemarkerCompiler.prototype.compile = function(ftl, data, callback) {
+    compiler.compileFtl(ftl, data, callback);
 }
 
 module.exports = FreemarkerCompiler;
