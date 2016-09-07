@@ -107,7 +107,11 @@ Freemarker.prototype.compileFtl = function(ftl, data, callback) {
     var cfgfile = this.configCompile(mock, ftl);
     // Get results
     this.processTemplate(cfgfile, function(err, result) {
-        fs.unlinkSync(cfgfile);
+        try {
+            fs.unlinkSync(cfgfile);
+        } catch (ex) {
+
+        }
         callback && callback(err, result);
     });
 }
