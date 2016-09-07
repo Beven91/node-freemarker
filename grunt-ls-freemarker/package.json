@@ -1,24 +1,24 @@
 {
-  "name": "grunt-ls-freemarker",
-  "version": "1.1.8",
-  "description": "> Freemarker renderer plugin for grunt.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "grunt-ls-freemarker",
-    "grunt plugin",
-    "freemarker",
-    "grunt"
-  ],
-  "dependencies": {
-    "iconv-lite": "^0.4.13"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Beven91/node-freemarker"
-  },
-  "author": "beven",
-  "license": "MIT"
+    "name": "grunt-ls-freemarker",
+    "version": "1.1.9",
+    "description": "> Freemarker renderer plugin for grunt.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "grunt-ls-freemarker",
+        "grunt plugin",
+        "freemarker",
+        "grunt"
+    ],
+    "dependencies": {
+        "iconv-lite": "^0.4.13"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Beven91/node-freemarker"
+    },
+    "author": "beven",
+    "license": "MIT"
 }

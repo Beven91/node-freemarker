@@ -84,7 +84,11 @@ Freemarker.prototype.compileByMockjs = function(filepath) {
     var cfgfile = this.configCompile(mock, file);
     // Get results
     this.processTemplate(cfgfile, function(err, result) {
-        fs.unlinkSync(cfgfile);
+        try {
+            fs.unlinkSync(cfgfile);
+        } catch (ex) {
+
+        }
         self.onViewCompiled(err, result, destFile, filepath);
     });
 }
