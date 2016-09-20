@@ -80,13 +80,12 @@ public class MapWrapper extends MapModel {
             type = "method";
             key = "()+" + key;
         }
-        switch (type) {
-            case "date":
-                return DataValue.dateValue(inner.get2(key));
-            case "method":
-                return createSimpleMethodModel(inner.get2(key));
-            default:
-                return inner.get2(key);
+        if (type.equals("date")) {
+            return DataValue.dateValue(inner.get2(key));
+        }else if(type.equals("method")) {
+            return createSimpleMethodModel(inner.get2(key));
+        }else {
+            return inner.get2(key);
         }
     }
 
