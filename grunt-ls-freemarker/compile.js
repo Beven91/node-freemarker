@@ -221,7 +221,6 @@ Freemarker.prototype.processTemplate = function(cfgFile, callback) {
             hasError = true;
             error = iconv.decode(data, 'gbk');
             dataBuffers.push(error);
-            console.log(error);
         });
         //on compiled
         cmd.stdout.on("end", function() {
