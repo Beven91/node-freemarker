@@ -1,6 +1,6 @@
 {
     "name": "grunt-ls-freemarker",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "description": "> Freemarker renderer plugin for grunt.",
     "main": "index.js",
     "scripts": {

@@ -89,7 +89,7 @@ Freemarker.prototype.compileByMockjs = function(filepath) {
         } catch (ex) {
 
         }
-        self.onViewCompiled(err, result, destFile, filepath);
+        self.onViewCompiled(null, result, destFile, filepath);
     });
 }
 
@@ -225,7 +225,7 @@ Freemarker.prototype.processTemplate = function(cfgFile, callback) {
         });
         //on compiled
         cmd.stdout.on("end", function() {
-            callback(null, self.resultRender(dataBuffers, hasError));
+            callback((hasError?true:null), self.resultRender(dataBuffers, hasError));
         });
     }
 }
