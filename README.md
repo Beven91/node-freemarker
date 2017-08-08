@@ -6,11 +6,11 @@ node-freemarker
 
 支持 后台model自定义的对象函数转换，例如:  ${pagination.html()} 
 
-#intall
+### intall
 
        npm install grunt-ls-freemarker
 
-#usage
+### usage
   
     var config = {
         options: {
@@ -33,7 +33,7 @@ node-freemarker
     api_builtin_enabled=true
    
     
-#mock
+### mock
 
     /*
     
@@ -59,9 +59,4 @@ node-freemarker
       "createTime":new Date(),// 对应 ${createTime?string('yyyy-MM-dd HH:mm:ss')} 数据类型为Date
       "strTime":"2016-02-01" // 对应${strTime} 注意这里是String类型的数据   
     }
-      
-    
-      
-   
-
-"# node-freemarker" 
+ 
